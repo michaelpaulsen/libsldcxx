@@ -3,12 +3,8 @@
 #include <iostream>
 #include <SDL3/SDL.h>
 #include "./headers/Window.h"
-//sdl stuff
+#include "./headers/SDL_CXX.h"
 
-static constexpr auto SDL_INIT_ALL = SDL_INIT_AUDIO | SDL_INIT_VIDEO
-| SDL_INIT_JOYSTICK | SDL_INIT_HAPTIC
-| SDL_INIT_GAMEPAD | SDL_INIT_EVENTS
-| SDL_INIT_SENSOR | SDL_INIT_CAMERA;
 
 
 
@@ -49,16 +45,11 @@ GameState PollEvents(SDL_Event& evnt) {
 }
 int main()
 {
-    
     //init all subsystems 
-    SDL_Init(SDL_INIT_ALL); 
-   
+    SKC::SDLCXX::init_all_sdl_sub_systems(); 
     auto window = SKC::SDLCXX::Window("test window", 680, 480); 
-        
-        //SDL_CreateWindow("window title", w_rect.size.w, w_rect.size.h,0);
     SDL_Event e{};
     while (auto gamestate = PollEvents(e) != GameState::QUIT) {
         std::cout << gamestate << '\r';
     }
-    std::cout << "Hello World!\n";
 }
