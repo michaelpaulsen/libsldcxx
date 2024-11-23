@@ -137,6 +137,8 @@
   <ItemGroup>
     <ClInclude Include="..\..\Skele_lib\concepts.hpp" />
     <ClInclude Include="..\..\Skele_lib\console\Console.hpp" />
+    <ClInclude Include="headers\events\events.h" />
+    <ClInclude Include="headers\SDL_CXX.h" />
     <ClInclude Include="headers\Window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
