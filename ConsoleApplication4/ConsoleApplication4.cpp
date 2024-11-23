@@ -21,9 +21,10 @@ int main()
     while (auto gamestate = env::PollEvents(e) != GameState::QUIT) {
         std::cout << gamestate << '\r';
         for (int x = 0; x < w; ++x) {
+            auto r = (int)(window.calculate_u_from_screen_x(x) * 255); 
             for (int y = 0; y < h; ++y) {
+                window.SetDrawColor(r, 0, (int)(window.calculate_v_from_screen_y(y) * 255));
                 window.DrawPoint(x, y); 
-                window.SetDrawColor(x % 255, frame % 255, y % 255);
 
             }
         }

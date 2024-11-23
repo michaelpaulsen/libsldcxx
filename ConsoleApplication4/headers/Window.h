@@ -21,7 +21,8 @@ namespace SKC::SDLCXX {
 			m_uid{ NEXT_WINDOW_UID++ },
 			m_window{ SDL_CreateWindow(name.data(), w, h, flags) },
 			m_renderer{ SDL_CreateRenderer(m_window, 0) },
-			m_flags{ flags }
+			m_flags{ flags },
+			m_w{ w }, m_h{ h }
 		{ }
 		//NOTE the order the members are listed here doen't matter they always will be initilized in the 
 		//order that they are in the class... 
@@ -57,11 +58,28 @@ namespace SKC::SDLCXX {
 			SDL_RenderPresent(m_renderer); 
 		}
 		
+		[[nodiscard]] 
+		double calculate_u_from_screen_x(int x) const {
+			return (double)x / (double)m_w;
+		}
+		[[nodiscard]] 
+		double calculate_v_from_screen_y(int y) const {
+			return (double)y / (double)m_h;
+		}
+		[[nodiscard]]
+		int calculate_screen_x_from_u(double u) const {
+			return (int)(u * m_w) % m_w; 
+		}
+		[[nodiscard]] 
+		int calculate_screen_y_from_v(double v) {
+			return (int)(v * m_h) % m_h;
+		}
 		~Window() {
 			SDL_DestroyRenderer(m_renderer); 
 			SDL_DestroyWindow(m_window);
 		}
 	private:
+		int m_w, m_h;
 		winuid_t m_uid; 
 		std::string m_name;
 		SDL_Window* m_window;
