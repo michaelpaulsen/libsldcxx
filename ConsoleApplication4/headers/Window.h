@@ -47,6 +47,16 @@ namespace SKC::SDLCXX {
 )]] auto name() const {
 			return m_name; 
 		}
+		void SetDrawColor(uint8_t r, uint8_t g, uint8_t b) {
+			SDL_SetRenderDrawColor(m_renderer, r, g, b, 255);
+		}
+		void DrawPoint(float x, float y) {
+			SDL_RenderPoint(m_renderer, x, y);
+		}
+		void Present() {
+			SDL_RenderPresent(m_renderer); 
+		}
+		
 		~Window() {
 			SDL_DestroyRenderer(m_renderer); 
 			SDL_DestroyWindow(m_window);
